@@ -8,6 +8,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var mongoose = require('mongoose');
+var graphqlHTTP = require('express-graphql');
+var schema = require('./graphql/documentSchemas');
+var cors = require('cors');
 
 var app = express();
 
@@ -29,6 +32,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+// mongodb connection
 mongoose
   .connect('mongodb://localhost/burea-backend', {
     promiseLibrary: require('bluebird'),
@@ -47,5 +51,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// graphQL
+app.use('*', cors());
+app.use(
+  '/graphql',
+  cors(),
+  graphqlHTTP({
+    schema: schema,
+    rootValue: global,
+    graphiql: true
+  })
+);
 
 module.exports = app;
