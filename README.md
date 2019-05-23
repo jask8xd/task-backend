@@ -1,11 +1,11 @@
 ## Scripts
 
-### git clone https://github.com/jask8xd/task-backend.git
+### `git clone https://github.com/jask8xd/task-backend.git`
 
-### cd task-backend
+### `cd task-backend`
 
-### npm install
+### `npm install`
 
-### mongod
+### `mongod`
 
-### npm start
+### `npm start`
